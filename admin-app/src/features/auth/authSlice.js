@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-// const getUserfromLocalStorage = localStorage.getItem("user")
-//   ? JSON.parse(localStorage.getItem("user"))
-//   : null;
+const getUserfromLocalStorage = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
 
-const userDefaultState = {
-  _id: null,
-  firstname: null,
-  lastname: null,
-  email: null,
-  mobile: null,
-  token: null,
-};
+// const userDefaultState = {
+//   _id: null,
+//   firstname: null,
+//   lastname: null,
+//   email: null,
+//   mobile: null,
+//   token: null,
+// };
 const initialState = {
-  user: userDefaultState,
+  user: getUserfromLocalStorage,
   isError: false,
   isLoading: false,
   isSuccess: false,
