@@ -34,9 +34,7 @@ const Login = () => {
     if (!user === null || isSuccess) {
       navigate("admin");
     } else {
-      if (isError) {
-        alert(message);
-      }
+      navigate("");
     }
   }, [user, isLoading, isError, isSuccess, message]);
   return (
@@ -45,6 +43,9 @@ const Login = () => {
       <div className="my-5 w-25 bg-white rounded-3 mx-auto p-4">
         <h3 className="text-center">Login</h3>
         <p className="text-center">Login to your account to continue</p>
+        <div className="error">
+          {message.message == "Rejected" ? "You are not an Admin." : ""}
+        </div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
