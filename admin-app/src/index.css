@@ -75,11 +75,3 @@ main::-webkit-scrollbar {
   right: -6px;
 }
 
-
-/* LOGIN */
-
-.error {
-  color: red;
-  font-size: 12px;
-}
-
