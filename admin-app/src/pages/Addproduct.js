@@ -111,7 +111,7 @@ const Addproduct = () => {
             type="text"
             label="Enter Product Title"
             name="title"
-            onChng={formik.handleChange("title")}
+            onChg={formik.handleChange("title")}
             onBlr={formik.handleBlur("title")}
             val={formik.values.title}
           />
@@ -133,7 +133,7 @@ const Addproduct = () => {
             type="number"
             label="Enter Product Price"
             name="price"
-            onChng={formik.handleChange("price")}
+            onChg={formik.handleChange("price")}
             onBlr={formik.handleBlur("price")}
             val={formik.values.price}
           />
@@ -214,7 +214,7 @@ const Addproduct = () => {
           </div>
           <CustomInput
             name="quantity"
-            onChng={formik.handleChange("quantity")}
+            onChg={formik.handleChange("quantity")}
             onBlr={formik.handleBlur("quantity")}
             val={formik.values.quantity}
             type="number"
