@@ -1,23 +1,13 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import pCategoryService from "./pcategoryService";
 
-// export const getCategories = createAsyncThunk(
-//   "productCategory/get-categories",
-//   async (thunkAPI) => {
-//     try {
-//       return await pCategoryService.getProductCategories();
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
 export const getCategories = createAsyncThunk(
   "productCategory/get-categories",
-  async (_, thunkAPI) => {
+  async (thunkAPI) => {
     try {
       return await pCategoryService.getProductCategories();
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

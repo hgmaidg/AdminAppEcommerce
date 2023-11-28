@@ -10,9 +10,10 @@ import {
   resetState,
 } from "../features/brand/brandSlice";
 import CustomModal from "../components/CustomModal";
+
 const columns = [
   {
-    title: "SNo", //serial number
+    title: "SNo",
     dataIndex: "key",
   },
   {
@@ -25,7 +26,8 @@ const columns = [
     dataIndex: "action",
   },
 ];
-function Brandlist() {
+
+const Brandlist = () => {
   const [open, setOpen] = useState(false);
   const [brandId, setbrandId] = useState("");
   const showModal = (e) => {
@@ -89,6 +91,6 @@ function Brandlist() {
       />
     </div>
   );
-}
+};
 
 export default Brandlist;

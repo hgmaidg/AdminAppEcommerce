@@ -1,44 +1,32 @@
 import axios from "axios";
-import { base_url } from "../../utils/base_url";
 import { config } from "../../utils/axiosconfig";
-
+import { base_url } from "../../utils/base_url";
 const getEnquiries = async () => {
   const response = await axios.get(`${base_url}enquiry/`);
 
   return response.data;
 };
-const createColor = async (color) => {
-  const response = await axios.post(`${base_url}color/`, color, config);
-
+const deleteEnquiry = async (id) => {
+  const response = await axios.delete(`${base_url}enquiry/${id}`, config);
   return response.data;
 };
-
-const updateColor = async (color) => {
+const getEnquiry = async (id) => {
+  const response = await axios.get(`${base_url}enquiry/${id}`);
+  return response.data;
+};
+const udpateEnquiry = async (enq) => {
   const response = await axios.put(
-    `${base_url}color/${color.id}`,
-    { title: color.colorData.title },
+    `${base_url}enquiry/${enq.id}`,
+    { status: enq.enqData },
     config
   );
-
-  return response.data;
-};
-const getColor = async (id) => {
-  const response = await axios.get(`${base_url}color/${id}`, config);
-
-  return response.data;
-};
-
-const deleteColor = async (id) => {
-  const response = await axios.delete(`${base_url}color/${id}`, config);
-
   return response.data;
 };
 const enquiryService = {
   getEnquiries,
-  createColor,
-  updateColor,
-  getColor,
-  deleteColor,
+  deleteEnquiry,
+  getEnquiry,
+  udpateEnquiry,
 };
 
 export default enquiryService;

@@ -41,7 +41,7 @@ const Addcat = () => {
     }
     if (isSuccess && updatedCategory) {
       toast.success("Category Updated Successfullly!");
-      navigate("/admin/list-category");
+      navigate("/admin/category-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");

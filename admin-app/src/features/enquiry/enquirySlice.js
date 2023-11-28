@@ -11,49 +11,38 @@ export const getEnquiries = createAsyncThunk(
     }
   }
 );
-// export const createColor = createAsyncThunk(
-//   "color/create-color",
-//   async (colorData, thunkAPI) => {
-//     try {
-//       return await colorService.createColor(colorData);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
 
-// export const getAColor = createAsyncThunk(
-//   "color/get-color",
-//   async (id, thunkAPI) => {
-//     try {
-//       return await colorService.getColor(id);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
-// export const updateAColor = createAsyncThunk(
-//   "color/update-color",
-//   async (color, thunkAPI) => {
-//     try {
-//       return await colorService.updateColor(color);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+export const deleteAEnquiry = createAsyncThunk(
+  "enquiry/delete-enquiry",
+  async (id, thunkAPI) => {
+    try {
+      return await enquiryService.deleteEnquiry(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getAEnquiry = createAsyncThunk(
+  "enquiry/get-enquiry",
+  async (id, thunkAPI) => {
+    try {
+      return await enquiryService.getEnquiry(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
-// export const deleteAColor = createAsyncThunk(
-//   "color/delete-color",
-//   async (id, thunkAPI) => {
-//     try {
-//       return await colorService.deleteColor(id);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
-
+export const updateAEnquiry = createAsyncThunk(
+  "enquiry/update-enquiry",
+  async (enq, thunkAPI) => {
+    try {
+      return await enquiryService.udpateEnquiry(enq);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -84,66 +73,55 @@ export const enquirySlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-      // .addCase(createColor.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(createColor.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = false;
-      //   state.isSuccess = true;
-      //   state.createdColor = action.payload;
-      // })
-      // .addCase(createColor.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.isSuccess = false;
-      //   state.message = action.error;
-      // })
-      // .addCase(updateAColor.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(updateAColor.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = false;
-      //   state.isSuccess = true;
-      //   state.updatedColor = action.payload;
-      // })
-      // .addCase(updateAColor.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.isSuccess = false;
-      //   state.message = action.error;
-      // })
-      // .addCase(getAColor.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getAColor.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = false;
-      //   state.isSuccess = true;
-      //   state.colorName = action.payload.title;
-      // })
-      // .addCase(getAColor.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.isSuccess = false;
-      //   state.message = action.error;
-      // })
-      // .addCase(deleteAColor.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(deleteAColor.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = false;
-      //   state.isSuccess = true;
-      //   state.deletedColor = action.payload.title;
-      // })
-      // .addCase(deleteAColor.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.isSuccess = false;
-      //   state.message = action.error;
-      // })
+      .addCase(deleteAEnquiry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAEnquiry.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedEnquiry = action.payload;
+      })
+      .addCase(deleteAEnquiry.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getAEnquiry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAEnquiry.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.enqName = action.payload.name;
+        state.enqMobile = action.payload.mobile;
+        state.enqEmail = action.payload.email;
+        state.enqComment = action.payload.comment;
+        state.enqStatus = action.payload.status;
+      })
+      .addCase(getAEnquiry.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(updateAEnquiry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAEnquiry.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedEnquiry = action.payload;
+      })
+      .addCase(updateAEnquiry.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(resetState, () => initialState);
   },
 });
