@@ -93,7 +93,7 @@ const AddCoupon = () => {
           <CustomInput
             type="text"
             name="name"
-            onChng={formik.handleChange("name")}
+            onChg={formik.handleChange("name")}
             onBlr={formik.handleBlur("name")}
             val={formik.values.name}
             label="Enter Coupon Name"
@@ -105,7 +105,7 @@ const AddCoupon = () => {
           <CustomInput
             type="date"
             name="expiry"
-            onChng={formik.handleChange("expiry")}
+            onChg={formik.handleChange("expiry")}
             onBlr={formik.handleBlur("expiry")}
             val={formik.values.expiry}
             label="Enter Expiry Data"
@@ -117,7 +117,7 @@ const AddCoupon = () => {
           <CustomInput
             type="number"
             name="discount"
-            onChng={formik.handleChange("discount")}
+            onChg={formik.handleChange("discount")}
             onBlr={formik.handleBlur("discount")}
             val={formik.values.discount}
             label="Enter Discount"

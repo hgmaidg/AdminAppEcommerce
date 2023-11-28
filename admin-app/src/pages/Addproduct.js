@@ -209,7 +209,7 @@ const Addproduct = () => {
             id=""
           >
             <option value="" disabled>
-              Select Category
+              Select Tags
             </option>
             <option value="featured">Featured</option>
             <option value="popular">Popular</option>
