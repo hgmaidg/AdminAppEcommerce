@@ -20,6 +20,8 @@ import { ImBlog } from "react-icons/im";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -195,7 +197,7 @@ const MainLayout = () => {
                   <Link
                     className="dropdown-item py-2 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
-                    to="#"
+                    to="/"
                   >
                     View Profile
                   </Link>
@@ -204,7 +206,7 @@ const MainLayout = () => {
                   <Link
                     className="dropdown-item py-2 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
-                    to="#"
+                    to="/"
                   >
                     signout
                   </Link>
@@ -230,6 +232,17 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={250}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
           <Outlet />
         </Content>
       </Layout>

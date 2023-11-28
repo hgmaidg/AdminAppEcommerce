@@ -1,32 +1,31 @@
-import React, { useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
-import { useState } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brand/brandSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
 import { getColors } from "../features/color/colorSlice";
-import "react-widgets/styles.css";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
-import { uploadImg, delImg } from "../features/upload/uploadSlice";
+import { delImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts, resetState } from "../features/product/productSlice";
-
-let schema = Yup.object().shape({
-  title: Yup.string().required("Title is required."),
-  description: Yup.string().required("Description is required."),
-  price: Yup.number().required("Price is required."),
-  brand: Yup.string().required("Brand is required."),
-  category: Yup.string().required("Category is required."),
-  color: Yup.array()
-    .min(1, "Pick at least one color.")
-    .required("Color is required."),
-  quantity: Yup.number().required("Quantity is required."),
+let schema = yup.object().shape({
+  title: yup.string().required("Title is Required"),
+  description: yup.string().required("Description is Required"),
+  price: yup.number().required("Price is Required"),
+  brand: yup.string().required("Brand is Required"),
+  category: yup.string().required("Category is Required"),
+  tags: yup.string().required("Tag is Required"),
+  color: yup
+    .array()
+    .min(1, "Pick at least one color")
+    .required("Color is Required"),
+  quantity: yup.number().required("Quantity is Required"),
 });
 
 const Addproduct = () => {
@@ -34,6 +33,7 @@ const Addproduct = () => {
   const navigate = useNavigate();
   const [color, setColor] = useState([]);
   const [images, setImages] = useState([]);
+  console.log(color);
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
@@ -68,6 +68,7 @@ const Addproduct = () => {
       url: i.url,
     });
   });
+
   useEffect(() => {
     formik.values.color = color ? color : " ";
     formik.values.images = img;
@@ -86,12 +87,31 @@ const Addproduct = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createProducts(values));
+      console.log("Form values:", values);
+      dispatch(createProducts(values))
+        .unwrap()
+        .then((result) => {
+          console.log("Product creation successful:", result);
+          toast.success("Product Added Successfully!");
+        })
+        .catch((error) => {
+          console.error("Product creation failed:", error);
+          toast.error("Something Went Wrong!");
+        });
+
       formik.resetForm();
       setColor(null);
+
       setTimeout(() => {
         dispatch(resetState());
+        console.log("State reset dispatched");
       }, 3000);
+      // dispatch(createProducts(values));
+      // formik.resetForm();
+      // setColor(null);
+      // setTimeout(() => {
+      //   dispatch(resetState());
+      // }, 3000);
     },
   });
   const handleColors = (e) => {
@@ -104,7 +124,6 @@ const Addproduct = () => {
       <div>
         <form
           onSubmit={formik.handleSubmit}
-          action=""
           className="d-flex gap-3 flex-column"
         >
           <CustomInput
@@ -146,10 +165,9 @@ const Addproduct = () => {
             onBlur={formik.handleBlur("brand")}
             value={formik.values.brand}
             className="form-control py-3 mb-3"
+            id=""
           >
-            <option value="" key="">
-              Select Brand
-            </option>
+            <option value="">Select Brand</option>
             {brandState.map((i, j) => {
               return (
                 <option key={j} value={i.title}>
@@ -167,10 +185,9 @@ const Addproduct = () => {
             onBlur={formik.handleBlur("category")}
             value={formik.values.category}
             className="form-control py-3 mb-3"
+            id=""
           >
-            <option value="" key="">
-              Select Category
-            </option>
+            <option value="">Select Category</option>
             {catState.map((i, j) => {
               return (
                 <option key={j} value={i.title}>
@@ -200,6 +217,7 @@ const Addproduct = () => {
           <div className="error">
             {formik.touched.tags && formik.errors.tags}
           </div>
+
           <Select
             mode="multiple"
             allowClear
@@ -213,12 +231,12 @@ const Addproduct = () => {
             {formik.touched.color && formik.errors.color}
           </div>
           <CustomInput
+            type="number"
+            label="Enter Product Quantity"
             name="quantity"
             onChg={formik.handleChange("quantity")}
             onBlr={formik.handleBlur("quantity")}
             val={formik.values.quantity}
-            type="number"
-            label="Enter Product Quantity"
           />
           <div className="error">
             {formik.touched.quantity && formik.errors.quantity}
@@ -255,8 +273,8 @@ const Addproduct = () => {
             })}
           </div>
           <button
-            type="submit"
             className="btn btn-success border-0 rounded-3 my-5"
+            type="submit"
           >
             Add Product
           </button>
