@@ -15,6 +15,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { BiCategory } from "react-icons/bi";
 import { CiSquareQuestion } from "react-icons/ci";
 import { PiSneakerMoveFill } from "react-icons/pi";
+import { RiCouponLine } from "react-icons/ri";
 import { GrBlog } from "react-icons/gr";
 import { ImBlog } from "react-icons/im";
 import { HiOutlineClipboardList } from "react-icons/hi";
@@ -114,6 +115,23 @@ const MainLayout = () => {
               label: "Orders",
             },
             {
+              key: "marketing",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "Marketing",
+              children: [
+                {
+                  key: "coupon",
+                  icon: <ImBlog className="fs-4" />,
+                  label: "Add Coupon",
+                },
+                {
+                  key: "coupon-list",
+                  icon: <RiCouponLine className="fs-4" />,
+                  label: "Coupon List",
+                },
+              ],
+            },
+            {
               key: "blogs",
               icon: <ImBlog className="fs-4" />,
               label: "Blogs",
@@ -166,6 +184,13 @@ const MainLayout = () => {
               height: 64,
             }}
           />
+          {/* {React.createElement(
+            collapsed ? <AiOutlinePicLeft /> : <AiOutlinePicRight />,
+            {
+              className: "trigger",
+              onClick: () => setCollapsed(!collapsed),
+            }
+          )} */}
           <div className="d-flex gap-3 align-items-center">
             <div className="position-relative">
               <IoMdNotifications className="fs-4" />
@@ -208,18 +233,9 @@ const MainLayout = () => {
                     style={{ height: "auto", lineHeight: "20px" }}
                     to="/"
                   >
-                    signout
+                    Signout
                   </Link>
                 </li>
-                {/* <li>
-                  <Link
-                    className="dropdown-item py-2 mb-1"
-                    style={{ height: "auto", lineHeight: "20px" }}
-                    to="#"
-                  >
-                    Something else here
-                  </Link>
-                </li> */}
               </div>
             </div>
           </div>

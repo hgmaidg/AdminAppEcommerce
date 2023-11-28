@@ -88,6 +88,7 @@ const Addproduct = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       console.log("Form values:", values);
+      console.log("Color:", color);
       dispatch(createProducts(values))
         .unwrap()
         .then((result) => {
