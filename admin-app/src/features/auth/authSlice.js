@@ -7,6 +7,7 @@ const getUserfromLocalStorage = localStorage.getItem("user")
 const initialState = {
   user: getUserfromLocalStorage,
   orders: [],
+  orderbyuser: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
