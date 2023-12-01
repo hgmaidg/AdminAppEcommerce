@@ -49,6 +49,7 @@ const Addproduct = () => {
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfullly!");
+      navigate("/admin/product-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -88,7 +89,7 @@ const Addproduct = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       console.log("Form values:", values);
-      console.log("Color:", color);
+      console.log("Color:", color.label);
       dispatch(createProducts(values))
         .unwrap()
         .then((result) => {
