@@ -46,15 +46,14 @@ const Addproduct = () => {
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
-  useEffect(() => {
-    if (isSuccess && createdProduct) {
-      toast.success("Product Added Successfullly!");
-      navigate("/admin/product-list");
-    }
-    if (isError) {
-      toast.error("Something Went Wrong!");
-    }
-  }, [isSuccess, isError, isLoading]);
+  // useEffect(() => {
+  //   if (isSuccess && createdProduct) {
+  //     navigate("/admin/product-list");
+  //   }
+  //   if (isError) {
+  //     toast.error("Something Went Wrong!");
+  //   }
+  // }, [isSuccess, isError, isLoading]);
   const coloropt = [];
   colorState.forEach((i) => {
     coloropt.push({
@@ -102,6 +101,8 @@ const Addproduct = () => {
         });
 
       formik.resetForm();
+      location.reload();
+      // Dropzone.removeAllFiles();
       setColor(null);
 
       setTimeout(() => {
