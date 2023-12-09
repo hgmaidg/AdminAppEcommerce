@@ -42,18 +42,19 @@
 import axios from "axios";
 import { base_url } from "../../utils/base_url";
 
-const getTokenFromLocalStorage = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user"))
-  : null;
+const getTokenFromLocalStorage = () =>
+  localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
 
-const config = {
+const config = () => ({
   headers: {
     Authorization: getTokenFromLocalStorage
-      ? `Bearer ${getTokenFromLocalStorage.token}`
+      ? `Bearer ${getTokenFromLocalStorage().token}`
       : null,
     Accept: "application/json",
   },
-};
+});
 
 const login = async (userData) => {
   const response = await axios.post(`${base_url}user/login`, userData);
@@ -64,7 +65,7 @@ const login = async (userData) => {
 };
 
 const getOrders = async () => {
-  const response = await axios.get(`${base_url}user/getallorders`, config);
+  const response = await axios.get(`${base_url}user/getallorders`, config());
   return response.data;
 };
 
@@ -72,7 +73,7 @@ const getOrder = async (id) => {
   const response = await axios.post(
     `${base_url}user/getorderbyuser/${id}`,
     "",
-    config
+    config()
   );
   return response.data;
 };
