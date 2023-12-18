@@ -33,6 +33,10 @@ const columns = [
     dataIndex: "color",
   },
   {
+    title: "Size",
+    dataIndex: "size",
+  },
+  {
     title: "Price",
     dataIndex: "price",
     sorter: (a, b) => a.price - b.price,
@@ -48,15 +52,25 @@ function Productlist() {
     dispatch(getProducts());
   }, []);
   const productState = useSelector((state) => state.product.products);
+  console.log(productState);
   const data1 = [];
   for (let i = 0; i < productState.length; i++) {
-    const colorTitles = productState[i].color.map((color) => color.title);
+    const colorTitles = productState[i].color?.map((color) => color.title);
+    console.log(colorTitles);
+    const sizeTitles = productState[i].size.map((size) => size.title);
+    console.log(sizeTitles);
+    if (colorTitles === undefined) {
+      console.error(`Color is undefined for product at index ${i}`);
+    } else {
+      console.log(`Color titles for product at index ${i}:`, colorTitles);
+    }
     data1.push({
       key: i + 1,
       title: productState[i].title,
       brand: productState[i].brand,
       category: productState[i].category,
       color: colorTitles.join(", "),
+      size: sizeTitles.join(", "),
 
       price: `${productState[i].price}`,
       action: (

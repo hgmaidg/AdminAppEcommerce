@@ -11,6 +11,7 @@ import MainLayout from "./components/MainLayout";
 import Bloglist from "./pages/Bloglist";
 import Customers from "./pages/Customers";
 import Colorlist from "./pages/Colorlist";
+import Sizelist from "./pages/Sizelist";
 import Categorylist from "./pages/Categorylist";
 import Addbrand from "./pages/Addbrand";
 import Brandlist from "./pages/Brandlist";
@@ -18,6 +19,8 @@ import Productlist from "./pages/Productlist";
 import Addblog from "./pages/Addblog";
 import Addblogcat from "./pages/Addblogcat";
 import Addcolor from "./pages/Addcolor";
+import Addsize from "./pages/Addsize";
+
 import Addcat from "./pages/Addcat";
 import Addproduct from "./pages/Addproduct";
 import Couponlist from "./pages/Couponlist";
@@ -54,6 +57,10 @@ function App() {
           <Route path="add-color" element={<Addcolor />} />
           <Route path="color-list" element={<Colorlist />} />
           <Route path="color/:id" element={<Addcolor />} />
+
+          <Route path="add-size" element={<Addsize />} />
+          <Route path="size-list" element={<Sizelist />} />
+          <Route path="size/:id" element={<Addsize />} />
 
           <Route path="add-category" element={<Addcat />} />
           <Route path="category-list" element={<Categorylist />} />
