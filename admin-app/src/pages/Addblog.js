@@ -28,6 +28,7 @@ const Addblog = () => {
   const location = useLocation();
   const getBlogId = location.pathname.split("/")[3];
   const imgState = useSelector((state) => state.upload.images);
+
   const bCatState = useSelector((state) => state.bCategory.bCategories);
   const blogState = useSelector((state) => state.blogs);
   const {
@@ -41,6 +42,14 @@ const Addblog = () => {
     blogImages,
     updatedBlog,
   } = blogState;
+  const img = [];
+  imgState.forEach((i) => {
+    img.push({
+      public_id: i.public_id,
+      url: i.url,
+    });
+  });
+
   useEffect(() => {
     if (getBlogId !== undefined) {
       dispatch(getABlog(getBlogId));
@@ -67,18 +76,10 @@ const Addblog = () => {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
-
-  const img = [];
-  imgState.forEach((i) => {
-    img.push({
-      public_id: i.public_id,
-      url: i.url,
-    });
-  });
   console.log(img);
   useEffect(() => {
     formik.values.images = img;
-  }, [blogImages]);
+  }, [img]);
 
   const formik = useFormik({
     enableReinitialize: true,
