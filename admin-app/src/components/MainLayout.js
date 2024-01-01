@@ -92,11 +92,11 @@ const MainLayout = () => {
                   icon: <BiCategory className="fs-5" />,
                   label: "Category",
                 },
-                {
-                  key: "category-list",
-                  icon: <BiCategory className="fs-5" />,
-                  label: "Category List",
-                },
+                // {
+                //   key: "category-list",
+                //   icon: <BiCategory className="fs-5" />,
+                //   label: "Category List",
+                // },
                 {
                   key: "add-color",
                   icon: <AiOutlineBgColors className="fs-5" />,

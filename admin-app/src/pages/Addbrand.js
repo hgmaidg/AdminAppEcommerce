@@ -147,20 +147,20 @@ const Addbrand = () => {
     }
   }, [getBrandId]);
 
-  // useEffect(() => {
-  //   if (isSuccess && createdBrand) {
-  //     toast.success("Brand Added Successfullly!");
-  //   }
-  //   // dispatch(getBrands());
-  //   if (isSuccess && updatedBrand) {
-  //     toast.success("Brand Updated Successfullly!");
-  //     navigate("/admin/add-brand");
-  //   }
+  useEffect(() => {
+    if (isSuccess && createdBrand) {
+      toast.success("Brand Added Successfullly!");
+    }
+    // dispatch(getBrands());
+    if (isSuccess && updatedBrand) {
+      toast.success("Brand Updated Successfullly!");
+      navigate("/admin/add-brand");
+    }
 
-  //   if (isError) {
-  //     toast.error("Something Went Wrong!");
-  //   }
-  // }, [isSuccess, isError, isLoading]);
+    // if (isError) {
+    //   toast.error("Something Went Wrong!");
+    // }
+  }, [isSuccess, isError, isLoading]);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -180,18 +180,18 @@ const Addbrand = () => {
           dispatch(getBrands());
           dispatch(resetState());
         }, 100);
-        if (isSuccess && createdBrand) {
-          toast.success("Brand Added Successfullly!");
-        }
-        // dispatch(getBrands());
-        // if (isSuccess && updatedBrand) {
-        //   toast.success("Brand Updated Successfullly!");
-        //   navigate("/admin/add-brand");
+        // if (isSuccess && createdBrand) {
+        //   toast.success("Brand Added Successfullly!");
         // }
+        // // dispatch(getBrands());
+        // // if (isSuccess && updatedBrand) {
+        // //   toast.success("Brand Updated Successfullly!");
+        // //   navigate("/admin/add-brand");
+        // // }
 
-        if (isError) {
-          toast.error("Something Went Wrong!");
-        }
+        // if (isError) {
+        //   toast.error("Something Went Wrong!");
+        // }
       }
     },
   });
