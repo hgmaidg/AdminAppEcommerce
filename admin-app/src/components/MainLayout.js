@@ -215,7 +215,7 @@ const MainLayout = () => {
                 <img
                   width={32}
                   height={32}
-                  src="https://scontent.fsgn5-8.fna.fbcdn.net/v/t39.30808-6/402845452_879944543539369_7955132519176891494_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFlsx8xmHGHGvd3ixQHPr9yGD2c34Igu1EYPZzfgiC7UUnZd-sKDu7HYDypLb4hiMQ5ghDrKIHmTHK8_Zq_aWwg&_nc_ohc=PpNmofvYjywAX_kGNzC&_nc_ht=scontent.fsgn5-8.fna&oh=00_AfBWDetCtumoDqYvcVGgNsllTjw5FLHVCm30W4WzO9li5g&oe=65685919"
+                  src="https://image.static.bstage.in/cdn-cgi/image/metadata=none/t1/c3f0abad-cbad-4924-9b8c-23436567edf5/342bb084-837b-4a0b-b181-3ea53dd9e173/ori.png"
                   alt=""
                 />
               </div>
