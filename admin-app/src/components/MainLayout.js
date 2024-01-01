@@ -82,11 +82,11 @@ const MainLayout = () => {
                   icon: <GrBlog className="fs-5" />,
                   label: "Brand",
                 },
-                {
-                  key: "brand-list",
-                  icon: <GrBlog className="fs-5" />,
-                  label: "Brand List",
-                },
+                // {
+                //   key: "brand-list",
+                //   icon: <GrBlog className="fs-5" />,
+                //   label: "Brand List",
+                // },
                 {
                   key: "add-category",
                   icon: <BiCategory className="fs-5" />,

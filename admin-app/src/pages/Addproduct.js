@@ -118,7 +118,8 @@ const Addproduct = () => {
         });
 
       formik.resetForm();
-      location.reload();
+      Dropzone.removeAllFiles();
+      // location.reload();
       // Dropzone.removeAllFiles();
       // setColor(null);
       // setSize(null);
