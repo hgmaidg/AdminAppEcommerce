@@ -162,11 +162,11 @@ const MainLayout = () => {
                   icon: <ImBlog className="fs-5" />,
                   label: "Blog Category",
                 },
-                {
-                  key: "blog-category-list",
-                  icon: <ImBlog className="fs-5" />,
-                  label: "Blog Category List",
-                },
+                // {
+                //   key: "blog-category-list",
+                //   icon: <ImBlog className="fs-5" />,
+                //   label: "Blog Category List",
+                // },
               ],
             },
             {
