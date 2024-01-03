@@ -50,7 +50,7 @@ function App() {
           <Route path="blog-category/:id" element={<Addblogcat />} />
 
           <Route path="orders" element={<Orders />} />
-          <Route path="order/:id" element={<ViewOrder />} />
+          <Route path="orders/:id" element={<ViewOrder />} />
 
           <Route path="customers" element={<Customers />} />
 
@@ -71,6 +71,7 @@ function App() {
           <Route path="brand-list" element={<Brandlist />} />
 
           <Route path="add-product" element={<Addproduct />} />
+          <Route path="product/:id" element={<Addproduct />} />
           <Route path="product-list" element={<Productlist />} />
 
           <Route path="coupon-list" element={<Couponlist />} />

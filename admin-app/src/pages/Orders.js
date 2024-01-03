@@ -44,13 +44,14 @@ const Orders = () => {
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].orderby.firstname,
+      name:
+        orderState[i].shippingInfo.firstName +
+        " " +
+        orderState[i].shippingInfo.lastName,
       product: (
-        <Link to={`/admin/order/${orderState[i].orderby._id}`}>
-          View Orders
-        </Link>
+        <Link to={`/admin/orders/${orderState[i].user}`}>View Orders</Link>
       ),
-      amount: orderState[i].paymentIntent.amount,
+      amount: orderState[i].totalPriceAfterDiscount,
       date: new Date(orderState[i].createdAt).toLocaleString(),
       action: (
         <>

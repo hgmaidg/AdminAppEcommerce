@@ -45,24 +45,49 @@ const ViewOrder = () => {
   const location = useLocation();
   const userId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getOrderByUser(userId));
+  // }, []);
   useEffect(() => {
-    dispatch(getOrderByUser(userId));
-  }, []);
-  const orderState = useSelector(
-    (state) => state.auth.orderbyuser[0]?.products
-  );
+    const fetchData = async () => {
+      try {
+        const result = await dispatch(getOrderByUser(userId));
+        console.log("Fetched data:", result);
+      } catch (error) {
+        console.error("Error fetching order data:", error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, userId]);
+  console.log(userId);
+  // const orderState = useSelector((state) => state.auth.user.orderItems);
+  const orderState = useSelector((state) => state.auth?.orders?.orderItems);
+  // console.log(
+  //   "auth state:",
+  //   useSelector((state) => state.auth)
+  // );
+  // console.log(
+  //   "orders state:",
+  //   useSelector((state) => state.auth?.orders)
+  // );
+  // console.log(
+  //   "orderItems:",
+  //   useSelector((state) => state.auth?.orders?.[0]?.orderItems)
+  // );
+  console.log("Order State:");
   console.log(orderState);
   const data1 = [];
   if (orderState && orderState.length) {
     for (let i = 0; i < orderState.length; i++) {
       data1.push({
         key: i + 1,
-        name: orderState[i].product.title,
-        brand: orderState[i].product.brand,
-        count: orderState[i].count,
-        amount: orderState[i].product.price,
-        color: orderState[i].product.color,
-        date: orderState[i].product.createdAt,
+        // name: orderState[i].orderItems.title,
+        // brand: orderState[i].orderItems.brand,
+        // count: orderState[i].count,
+        amount: orderState[i].totalPriceAfterDiscount,
+        // color: orderState[i].orderItems.color,
+        date: orderState[i].createdAt,
         action: (
           <>
             <Link to="/" className=" fs-3 text-danger">
