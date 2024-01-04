@@ -42,8 +42,8 @@ let schema = yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const getProductId = location.pathname.split("/")[3];
+  // const location = useLocation();
+  // const getProductId = location.pathname.split("/")[3];
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pCategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
@@ -55,8 +55,9 @@ const Addproduct = () => {
   const [images, setImages] = useState([]);
   // console.log(color);
 
-  const productState = useSelector((state) => state.product);
+  // const productState = useSelector((state) => state.product);
   const newProduct = useSelector((state) => state.product);
+
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
   // const {
   //   isSuccess,
@@ -98,22 +99,22 @@ const Addproduct = () => {
     });
   });
 
-  useEffect(() => {
-    if (getProductId !== undefined) {
-      dispatch(getAProduct(getProductId));
-      console.log(getProductId);
-      img.push(productImages);
-      // coloropt.push(productColor);
-      // console.log(coloropt);
-      // sizeopt.push(productSize);
-      // console.log(sizeopt);
-    } else {
-      dispatch(resetState());
-    }
-  }, [getProductId]);
+  // useEffect(() => {
+  //   if (getProductId !== undefined) {
+  //     dispatch(getAProduct(getProductId));
+  //     console.log(getProductId);
+  //     img.push(productImages);
+  //     // coloropt.push(productColor);
+  //     // console.log(coloropt);
+  //     // sizeopt.push(productSize);
+  //     // console.log(sizeopt);
+  //   } else {
+  //     dispatch(resetState());
+  //   }
+  // }, [getProductId]);
 
   useEffect(() => {
-    dispatch(resetState());
+    // dispatch(resetState());
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(getColors());
@@ -149,7 +150,7 @@ const Addproduct = () => {
   }, [color, size, img]);
 
   const formik = useFormik({
-    enableReinitialize: true,
+    // enableReinitialize: true,
     initialValues: {
       title: "",
       description: "",
@@ -221,7 +222,8 @@ const Addproduct = () => {
   return (
     <div>
       <h3 className="mb-4 title">
-        {getProductId !== undefined ? "Edit" : "Add"} Product
+        {/* {getProductId !== undefined ? "Edit" : "Add"} Product */}
+        Add Product
       </h3>
       <div>
         <form
@@ -390,7 +392,8 @@ const Addproduct = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            {getProductId !== undefined ? "Edit" : "Add"} Product
+            {/* {getProductId !== undefined ? "Edit" : "Add"} Product */}
+            Add
           </button>
         </form>
       </div>
