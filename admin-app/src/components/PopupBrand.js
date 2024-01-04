@@ -48,6 +48,7 @@ export default function Popup(props) {
   console.log("Location Path:", location.pathname);
   console.log("Brand ID:", getBrandId);
   const [brandId, setbrandId] = useState("");
+  const [open, setOpen] = useState(false);
   const newBrand = useSelector((state) => state.brand);
 
   const brandState = useSelector((state) => state.brand.brands);

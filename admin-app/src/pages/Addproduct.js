@@ -56,24 +56,25 @@ const Addproduct = () => {
   // console.log(color);
 
   const productState = useSelector((state) => state.product);
-
-  const {
-    isSuccess,
-    isError,
-    isLoading,
-    createdProduct,
-    updatedProduct,
-    productName,
-    productDesc,
-    productPrice,
-    productBrand,
-    productCategory,
-    productTags,
-    productColor,
-    productSize,
-    productImages,
-    productQuantity,
-  } = productState;
+  const newProduct = useSelector((state) => state.product);
+  const { isSuccess, isError, isLoading, createdProduct } = newProduct;
+  // const {
+  //   isSuccess,
+  //   isError,
+  //   isLoading,
+  //   createdProduct,
+  //   updatedProduct,
+  //   productName,
+  //   productDesc,
+  //   productPrice,
+  //   productBrand,
+  //   productCategory,
+  //   productTags,
+  //   productColor,
+  //   productSize,
+  //   productImages,
+  //   productQuantity,
+  // } = productState;
 
   const coloropt = [];
   colorState.forEach((i) => {
@@ -128,65 +129,68 @@ const Addproduct = () => {
     if (isSuccess && createdProduct) {
       navigate("/admin/product-list");
     }
-    if (isSuccess && updatedProduct) {
-      toast.success("Product Updated Successfully");
-      navigate("/admin/product-list");
-    }
+    // if (isSuccess && updatedProduct) {
+    //   toast.success("Product Updated Successfully");
+    //   navigate("/admin/product-list");
+    // }
     if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
 
   useEffect(() => {
-    formik.values.color = coloropt;
-    formik.values.size = sizeopt;
+    // formik.values.color = coloropt;
+    // formik.values.size = sizeopt;
     // formik.values.color = color ? color.map((c) => c.label) : [];
     // formik.values.size = size ? size.map((s) => s.label) : [];
+    formik.values.color = color ? color : " ";
+    formik.values.size = size ? size : " ";
     formik.values.images = img;
-  }, [coloropt, sizeopt, img]);
+  }, [color, size, img]);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: productName || "",
-      description: productDesc || "",
-      price: productPrice || "",
-      brand: productBrand || "",
-      category: productCategory || "",
-      tags: productTags || "",
+      title: "",
+      description: "",
+      price: "",
+      brand: "",
+      category: "",
+      tags: "",
       color: "",
       size: "",
-      quantity: productQuantity || "",
+      quantity: "",
       images: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      // console.log("Form values:", values);
-      // console.log("Color:", color.label);
-      // dispatch(createProducts(values))
-      //   .unwrap()
-      //   .then((result) => {
-      //     console.log("Product creation successful:", result);
-      //     toast.success("Product Added Successfully!");
-      //   })
-      //   .catch((error) => {
-      //     console.error("Product creation failed:", error);
-      //     toast.error("Something Went Wrong!");
-      //   });
+      console.log("Form values:", values);
+      console.log("Color:", color.label);
+      dispatch(createProducts(values))
+        .unwrap()
+        .then((result) => {
+          console.log("Product creation successful:", result);
+          toast.success("Product Added Successfully!");
+        })
+        .catch((error) => {
+          console.error("Product creation failed:", error);
+          toast.error("Something Went Wrong!");
+        });
 
-      if (getProductId !== undefined) {
-        const data = { id: getProductId, productData: values };
-        dispatch(updateAProduct(data));
-        dispatch(resetState());
-      } else {
-        dispatch(createProducts(values));
-        formik.resetForm();
-        setTimeout(() => {
-          dispatch(resetState());
-        }, 300);
-      }
-      formik.resetForm();
-      Dropzone.removeAllFiles();
+      // if (getProductId !== undefined) {
+      //   const data = { id: getProductId, productData: values };
+      //   dispatch(updateAProduct(data));
+      //   dispatch(resetState());
+      // } else {
+      //   dispatch(createProducts(values));
+      //   formik.resetForm();
+      //   setTimeout(() => {
+      //     dispatch(resetState());
+      //   }, 300);
+      // }
+      // formik.resetForm();
+      // Dropzone.removeAllFiles();
+
       // location.reload();
       // Dropzone.removeAllFiles();
       // setColor(null);
