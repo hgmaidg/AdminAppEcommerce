@@ -165,8 +165,8 @@ const Addproduct = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log("Form values:", values);
-      console.log("Color:", color.label);
+      // console.log("Form values:", values);
+      // console.log("Color:", color.label);
       dispatch(createProducts(values))
         .unwrap()
         .then((result) => {
@@ -201,6 +201,7 @@ const Addproduct = () => {
         dispatch(resetState());
         console.log("State reset dispatched");
       }, 3000);
+      window.location.reload();
       // dispatch(createProducts(values));
       // formik.resetForm();
       // setColor(null);
