@@ -47,6 +47,8 @@ const MainLayout = () => {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key === "signout") {
+              localStorage.clear();
+              navigate("/");
             } else {
               navigate(key);
             }
@@ -60,7 +62,7 @@ const MainLayout = () => {
             {
               key: "customers",
               icon: <AiOutlineUser className="fs-4" />,
-              label: "Customers",
+              label: "Accounts",
             },
             {
               key: "catalog",

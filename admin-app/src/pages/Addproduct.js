@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -14,7 +14,13 @@ import { getSizes } from "../features/size/sizeSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts, resetState } from "../features/product/productSlice";
+import {
+  createProducts,
+  getProducts,
+  getAProduct,
+  updateAProduct,
+  resetState,
+} from "../features/product/productSlice";
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
   description: yup.string().required("Description is Required"),
@@ -36,32 +42,41 @@ let schema = yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [color, setColor] = useState([]);
-  const [size, setSize] = useState([]);
-  const [images, setImages] = useState([]);
-  console.log(color);
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-    dispatch(getColors());
-    dispatch(getSizes());
-  }, []);
-
+  // const location = useLocation();
+  // const getProductId = location.pathname.split("/")[3];
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pCategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
   const sizeState = useSelector((state) => state.size.sizes);
   const imgState = useSelector((state) => state.upload.images);
+
+  const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
+  const [images, setImages] = useState([]);
+  // console.log(color);
+
+  // const productState = useSelector((state) => state.product);
   const newProduct = useSelector((state) => state.product);
+
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
-  // useEffect(() => {
-  //   if (isSuccess && createdProduct) {
-  //     navigate("/admin/product-list");
-  //   }
-  //   if (isError) {
-  //     toast.error("Something Went Wrong!");
-  //   }
-  // }, [isSuccess, isError, isLoading]);
+  // const {
+  //   isSuccess,
+  //   isError,
+  //   isLoading,
+  //   createdProduct,
+  //   updatedProduct,
+  //   productName,
+  //   productDesc,
+  //   productPrice,
+  //   productBrand,
+  //   productCategory,
+  //   productTags,
+  //   productColor,
+  //   productSize,
+  //   productImages,
+  //   productQuantity,
+  // } = productState;
+
   const coloropt = [];
   colorState.forEach((i) => {
     coloropt.push({
@@ -84,12 +99,58 @@ const Addproduct = () => {
     });
   });
 
+  // useEffect(() => {
+  //   if (getProductId !== undefined) {
+  //     dispatch(getAProduct(getProductId));
+  //     console.log(getProductId);
+  //     img.push(productImages);
+  //     // coloropt.push(productColor);
+  //     // console.log(coloropt);
+  //     // sizeopt.push(productSize);
+  //     // console.log(sizeopt);
+  //   } else {
+  //     dispatch(resetState());
+  //   }
+  // }, [getProductId]);
+
   useEffect(() => {
+    // dispatch(resetState());
+    dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getColors());
+    dispatch(getSizes());
+  }, []);
+  // useEffect(() => {
+  //   // Set initial values for color and size
+  //   setColor(productColor || []);
+  //   setSize(productSize || []);
+  // }, [productColor, productSize]);
+
+  useEffect(() => {
+    if (isSuccess && createdProduct) {
+      navigate("/admin/product-list");
+    }
+    // if (isSuccess && updatedProduct) {
+    //   toast.success("Product Updated Successfully");
+    //   navigate("/admin/product-list");
+    // }
+    if (isError) {
+      toast.error("Something Went Wrong!");
+    }
+  }, [isSuccess, isError, isLoading]);
+
+  useEffect(() => {
+    // formik.values.color = coloropt;
+    // formik.values.size = sizeopt;
+    // formik.values.color = color ? color.map((c) => c.label) : [];
+    // formik.values.size = size ? size.map((s) => s.label) : [];
     formik.values.color = color ? color : " ";
     formik.values.size = size ? size : " ";
     formik.values.images = img;
   }, [color, size, img]);
+
   const formik = useFormik({
+    // enableReinitialize: true,
     initialValues: {
       title: "",
       description: "",
@@ -104,8 +165,8 @@ const Addproduct = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log("Form values:", values);
-      console.log("Color:", color.label);
+      // console.log("Form values:", values);
+      // console.log("Color:", color.label);
       dispatch(createProducts(values))
         .unwrap()
         .then((result) => {
@@ -117,8 +178,20 @@ const Addproduct = () => {
           toast.error("Something Went Wrong!");
         });
 
-      formik.resetForm();
-      Dropzone.removeAllFiles();
+      // if (getProductId !== undefined) {
+      //   const data = { id: getProductId, productData: values };
+      //   dispatch(updateAProduct(data));
+      //   dispatch(resetState());
+      // } else {
+      //   dispatch(createProducts(values));
+      //   formik.resetForm();
+      //   setTimeout(() => {
+      //     dispatch(resetState());
+      //   }, 300);
+      // }
+      // formik.resetForm();
+      // Dropzone.removeAllFiles();
+
       // location.reload();
       // Dropzone.removeAllFiles();
       // setColor(null);
@@ -128,6 +201,7 @@ const Addproduct = () => {
         dispatch(resetState());
         console.log("State reset dispatched");
       }, 3000);
+      window.location.reload();
       // dispatch(createProducts(values));
       // formik.resetForm();
       // setColor(null);
@@ -138,15 +212,20 @@ const Addproduct = () => {
   });
   const handleColors = (e) => {
     setColor(e);
+    // formik.handleChange("color")(e);
     console.log(color);
   };
   const handleSizes = (e) => {
     setSize(e);
+    // formik.handleChange("size")(e);
     console.log(size);
   };
   return (
     <div>
-      <h3 className="mb-4 title">Add Product</h3>
+      <h3 className="mb-4 title">
+        {/* {getProductId !== undefined ? "Edit" : "Add"} Product */}
+        Add Product
+      </h3>
       <div>
         <form
           onSubmit={formik.handleSubmit}
@@ -314,7 +393,8 @@ const Addproduct = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Product
+            {/* {getProductId !== undefined ? "Edit" : "Add"} Product */}
+            Add
           </button>
         </form>
       </div>

@@ -90,6 +90,7 @@ function Productlist() {
       size: sizeTitles.join(", "),
 
       price: `${productState[i].price}`,
+
       action: (
         <>
           <Link
