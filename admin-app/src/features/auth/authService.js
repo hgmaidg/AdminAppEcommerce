@@ -69,25 +69,42 @@ const getOrders = async () => {
   return response.data;
 };
 
+// const getOrder = async (id) => {
+//   const response = await axios.get(
+//     `${base_url}user/getorderbyuser/${id}`,
+//     "",
+//     config()
+//   );
+//   return response.data;
+// };
+
 const getOrder = async (id) => {
   const response = await axios.get(
-    `${base_url}user/getorderbyuser/${id}`,
-    "",
+    `${base_url}user/getOrder/${id}`,
+
+    config()
+  );
+  return response.data;
+};
+// const updateOrder = async (data) => {
+//   const response = await axios.put(
+//     `${base_url}user/updateOrder/${data.id}`,
+//     { status: data?.status },
+//     config()
+//   );
+//   return response.data;
+// };
+
+const getMonthlyOrders = async () => {
+  const response = await axios.get(
+    `${base_url}user/getMonthWiseOrderIncome`,
     config()
   );
   return response.data;
 };
 
-const getMonthlyOrders = async (data) => {
-  const response = await axios.get(
-    `${base_url}user/getMonthWiseOrderIncome`,
-    data
-  );
-  return response.data;
-};
-
-const getYearlyStats = async (data) => {
-  const response = await axios.get(`${base_url}user/getyearlyorders`, data);
+const getYearlyStats = async () => {
+  const response = await axios.get(`${base_url}user/getyearlyorders`, config());
   return response.data;
 };
 

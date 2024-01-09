@@ -53,7 +53,7 @@ const Orders = () => {
         " " +
         orderState[i].shippingInfo.lastName,
       product: (
-        <Link to={`/admin/orders/${orderState[i].user}`}>View Orders</Link>
+        <Link to={`/admin/orders/${orderState[i]._id}`}>View Orders</Link>
       ),
       amount: orderState[i].totalPriceAfterDiscount,
       date: new Date(orderState[i].createdAt).toLocaleString(),

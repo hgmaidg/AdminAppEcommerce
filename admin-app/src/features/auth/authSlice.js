@@ -24,6 +24,60 @@ export const login = createAsyncThunk(
   }
 );
 
+// export const getMonthlyData = createAsyncThunk(
+//   "orders/monthlydata",
+//   async (data, thunkAPI) => {
+//     try {
+//       return await authService.getMonthlyOrders(data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+
+// export const getYearlyData = createAsyncThunk(
+//   "orders/yearlydata",
+//   async (data, thunkAPI) => {
+//     try {
+//       return await authService.getYearlyStats(data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+
+export const getOrders = createAsyncThunk(
+  "order/get-orders",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.getOrders(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getOrderByUser = createAsyncThunk(
+  "order/get-order",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.getOrder(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getOrder = createAsyncThunk(
+  "order/get-a-order",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.getOrder(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const getMonthlyData = createAsyncThunk(
   "orders/monthlydata",
   async (data, thunkAPI) => {
@@ -45,27 +99,16 @@ export const getYearlyData = createAsyncThunk(
     }
   }
 );
-
-export const getOrders = createAsyncThunk(
-  "order/get-orders",
-  async (thunkAPI) => {
-    try {
-      return await authService.getOrders();
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-export const getOrderByUser = createAsyncThunk(
-  "order/get-order",
-  async (id, thunkAPI) => {
-    try {
-      return await authService.getOrder(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+// export const getYearlyData = createAsyncThunk(
+//   "orders/yearlydata",
+//   async (data, thunkAPI) => {
+//     try {
+//       return await authService.getYearlyStats(data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
 
 export const updateAnOrder = createAsyncThunk(
   "order/update-order",
@@ -127,6 +170,102 @@ export const authSlice = createSlice({
         state.message = "success";
       })
       .addCase(getOrderByUser.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(getOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOrder.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.singleorder = action.payload;
+        state.message = "success";
+      })
+      .addCase(getOrder.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      // .addCase(getMonthlyData.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getMonthlyData.fulfilled, (state, action) => {
+      //   state.isError = false;
+      //   state.isLoading = false;
+      //   state.isSuccess = true;
+      //   state.monthlyData = action.payload;
+      //   state.message = "success";
+      // })
+      // .addCase(getMonthlyData.rejected, (state, action) => {
+      //   state.isError = true;
+      //   state.isSuccess = false;
+      //   state.message = action.error;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getYearlyData.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getYearlyData.fulfilled, (state, action) => {
+      //   state.isError = false;
+      //   state.isLoading = false;
+      //   state.isSuccess = true;
+      //   state.yearlyData = action.payload;
+      //   state.message = "success";
+      // })
+      // .addCase(getYearlyData.rejected, (state, action) => {
+      //   state.isError = true;
+      //   state.isSuccess = false;
+      //   state.message = action.error;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getOrder.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getOrder.fulfilled, (state, action) => {
+      //   state.isError = false;
+      //   state.isLoading = false;
+      //   state.isSuccess = true;
+      //   state.singleorder = action.payload;
+      //   state.message = "success";
+      // })
+      // .addCase(getOrder.rejected, (state, action) => {
+      //   state.isError = true;
+      //   state.isSuccess = false;
+      //   state.message = action.error;
+      //   state.isLoading = false;
+      // })
+      .addCase(getMonthlyData.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMonthlyData.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.monthlyData = action.payload;
+        state.message = "success";
+      })
+      .addCase(getMonthlyData.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        state.isLoading = false;
+      })
+      .addCase(getYearlyData.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getYearlyData.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.yearlyData = action.payload;
+        state.message = "success";
+      })
+      .addCase(getYearlyData.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
