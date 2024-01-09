@@ -19,6 +19,7 @@ const updateCoupon = async (coupon) => {
       name: coupon.couponData.name,
       expiry: coupon.couponData.expiry,
       discount: coupon.couponData.discount,
+      limitTurns: coupon.couponData.limitTurns,
     },
     config
   );

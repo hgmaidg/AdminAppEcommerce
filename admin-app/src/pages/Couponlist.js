@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Table, Radio } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -19,9 +19,28 @@ const columns = [
     sorter: (a, b) => a.name.length - b.name.length,
   },
   {
+    title: "Active",
+    dataIndex: "active",
+  },
+  {
     title: "Discount",
     dataIndex: "discount",
     sorter: (a, b) => a.discount - b.discount,
+  },
+  {
+    title: "Limit ($)",
+    dataIndex: "limit",
+    sorter: (a, b) => a.limit - b.limit,
+  },
+  {
+    title: "Limit Turns",
+    dataIndex: "limitTurns",
+    sorter: (a, b) => a.limitTurns - b.limitTurns,
+  },
+  {
+    title: "Used Turns",
+    dataIndex: "usedTurns",
+    sorter: (a, b) => a.usedTurns - b.usedTurns,
   },
   {
     title: "Expiry",
@@ -54,8 +73,41 @@ const Couponlist = () => {
   for (let i = 0; i < couponState.length; i++) {
     data1.push({
       key: i + 1,
+      active: (
+        <>
+          {couponState[i].active ? (
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckChecked"
+                checked
+              ></input>
+              <label class="form-check-label" for="flexCheckChecked">
+                Active
+              </label>
+            </div>
+          ) : (
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckChecked"
+              ></input>
+              <label class="form-check-label" for="flexCheckChecked">
+                Active
+              </label>
+            </div>
+          )}
+        </>
+      ),
       name: couponState[i].name,
       discount: couponState[i].discount,
+      limit: couponState[i].limit,
+      limitTurns: couponState[i].limitTurn,
+      usedTurns: couponState[i].usedTurn,
       expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>

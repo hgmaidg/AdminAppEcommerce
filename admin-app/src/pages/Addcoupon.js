@@ -16,6 +16,7 @@ let schema = yup.object().shape({
   name: yup.string().required("Coupon Name is Required"),
   expiry: yup.date().required("Expiry Date is Required"),
   discount: yup.number().required("Discount Percentage is Required"),
+  limitTurns: yup.number().required("Limit Turn is Required"),
 });
 const AddCoupon = () => {
   const dispatch = useDispatch();
@@ -125,6 +126,18 @@ const AddCoupon = () => {
           />
           <div className="error">
             {formik.touched.discount && formik.errors.discount}
+          </div>
+          <CustomInput
+            type="number"
+            name="limitTurns"
+            onChg={formik.handleChange("limitTurns")}
+            onBlr={formik.handleBlur("limitTurns")}
+            val={formik.values.limitTurns}
+            label="Enter Limit Turns"
+            id="limitTurns"
+          />
+          <div className="error">
+            {formik.touched.limitTurns && formik.errors.limitTurns}
           </div>
           <button
             className="btn btn-success border-0 rounded-3 my-5"
