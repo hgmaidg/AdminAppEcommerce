@@ -24,6 +24,28 @@ export const login = createAsyncThunk(
   }
 );
 
+export const getMonthlyData = createAsyncThunk(
+  "orders/monthlydata",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.getMonthlyOrders(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getYearlyData = createAsyncThunk(
+  "orders/yearlydata",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.getYearlyStats(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const getOrders = createAsyncThunk(
   "order/get-orders",
   async (thunkAPI) => {
@@ -39,6 +61,17 @@ export const getOrderByUser = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       return await authService.getOrder(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateAnOrder = createAsyncThunk(
+  "order/update-order",
+  async (order, thunkAPI) => {
+    try {
+      return await authService.udpateOrder(order);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -98,6 +131,21 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         state.isLoading = false;
+      })
+      .addCase(updateAnOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAnOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedOrder = action.payload;
+      })
+      .addCase(updateAnOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
       });
   },
 });

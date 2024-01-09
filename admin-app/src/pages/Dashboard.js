@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsArrowDownRight, BsArrowUpRight } from "react-icons/bs";
 import { Column } from "@ant-design/charts";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  getMonthlyData,
+  getYearlyData,
+  getOrders,
+} from "../features/auth/authSlice";
+
 const columns = [
   {
     title: "SNo", //serial number
@@ -21,15 +29,62 @@ const columns = [
   },
 ];
 const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: 32,
-    status: `London, Park Lane no. ${i}`,
-  });
-}
+// for (let i = 0; i < 46; i++) {
+//   data1.push({
+//     key: i,
+//     name: `Edward King ${i}`,
+//     product: 32,
+//     status: `London, Park Lane no. ${i}`,
+//   });
+// }
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const monthlyDataState = useSelector((state) => state?.auth?.monthlyData);
+  const yearlyDataState = useSelector((state) => state?.auth?.yearlyData);
+  const orderState = useSelector((state) => state?.auth?.orders.orders);
+  const [dataMonthly, setDataMonthly] = useState([]);
+  const [dataMonthlySales, setDataMonthlySales] = useState([]);
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    dispatch(getMonthlyData());
+    dispatch(getYearlyData());
+    dispatch(getOrders());
+  }, []);
+
+  useEffect(() => {
+    let monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let data = [];
+    let monthlyOrderCount = [];
+    for (let index = 0; index < monthlyDataState?.length; index++) {
+      const element = monthlyDataState[index];
+      data.push({
+        type: monthNames[element?._id?.month],
+        income: element?.amount,
+      });
+      monthlyOrderCount.push({
+        type: monthNames[element?._id?.month],
+        sales: element?.count,
+      });
+    }
+    setDataMonthly(data);
+    setDataMonthlySales(monthlyOrderCount);
+    const data1 = [];
+  });
+
   const data = [
     {
       type: "Jan",

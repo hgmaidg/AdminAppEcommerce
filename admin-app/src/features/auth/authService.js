@@ -78,10 +78,35 @@ const getOrder = async (id) => {
   return response.data;
 };
 
+const getMonthlyOrders = async (data) => {
+  const response = await axios.get(
+    `${base_url}user/getMonthWiseOrderIncome`,
+    data
+  );
+  return response.data;
+};
+
+const getYearlyStats = async (data) => {
+  const response = await axios.get(`${base_url}user/getyearlyorders`, data);
+  return response.data;
+};
+
+const udpateOrder = async (order) => {
+  const response = await axios.put(
+    `${base_url}user/orders/${order.id}`,
+    { orderStatus: order.orderData },
+    config()
+  );
+  return response.data;
+};
+
 const authService = {
   login,
   getOrders,
   getOrder,
+  getYearlyStats,
+  getMonthlyOrders,
+  udpateOrder,
 };
 
 export default authService;

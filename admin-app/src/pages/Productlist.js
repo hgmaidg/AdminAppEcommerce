@@ -86,8 +86,8 @@ function Productlist() {
       title: productState[i].title,
       brand: productState[i].brand,
       category: productState[i].category,
-      color: colorTitles.join(", "),
-      size: sizeTitles.join(", "),
+      color: colorTitles?.join(", "),
+      size: sizeTitles?.join(", "),
 
       price: `${productState[i].price}`,
 
