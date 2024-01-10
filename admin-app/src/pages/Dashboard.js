@@ -82,7 +82,108 @@ const Dashboard = () => {
   //   setDataMonthlySales(monthlyOrderCount);
   //   const data1 = [];
   // });
-
+  const dataOrder = [
+    {
+      type: "Jan",
+      sales: 3,
+    },
+    {
+      type: "Feb",
+      sales: 5,
+    },
+    {
+      type: "Mar",
+      sales: 5,
+    },
+    {
+      type: "Apr",
+      sales: 10,
+    },
+    {
+      type: "May",
+      sales: 1,
+    },
+    {
+      type: "Jun",
+      sales: 2,
+    },
+    {
+      type: "July",
+      sales: 3,
+    },
+    {
+      type: "Aug",
+      sales: 9,
+    },
+    {
+      type: "Sept",
+      sales: 6,
+    },
+    {
+      type: "Oct",
+      sales: 2,
+    },
+    {
+      type: "Nov",
+      sales: 3,
+    },
+    {
+      type: "Dec",
+      sales: 6,
+    },
+  ];
+  const dataIncome = [
+    {
+      type: "Jan",
+      income: 30,
+    },
+    {
+      type: "Feb",
+      income: 52,
+    },
+    {
+      type: "Mar",
+      income: 90,
+    },
+    {
+      type: "Apr",
+      income: 150,
+    },
+    {
+      type: "May",
+      income: 90,
+    },
+    {
+      type: "Jun",
+      income: 130,
+    },
+    {
+      type: "July",
+      income: 120,
+    },
+    {
+      type: "Aug",
+      income: 900,
+    },
+    {
+      type: "Sept",
+      income: 139,
+    },
+    {
+      type: "Oct",
+      income: 200,
+    },
+    {
+      type: "Nov",
+      income: 135,
+    },
+    {
+      type: "Dec",
+      income: 120,
+    },
+  ];
+  const totalIncome = dataIncome.reduce((acc, item) => acc + item.income, 0);
+  const totalSales = dataOrder.reduce((acc, item) => acc + item.sales, 0);
   const dispatch = useDispatch();
   const monthlyDataState = useSelector((state) => state.auth?.monthlyData);
   const yearlyDataState = useSelector((state) => state.auth?.yearlyData);
@@ -169,7 +270,7 @@ const Dashboard = () => {
   }, [monthlyDataState]);
 
   const config = {
-    data: dataMonthly,
+    data: dataIncome,
     xField: "type",
     yField: "income",
     // color: ({ type }) => {
@@ -198,7 +299,7 @@ const Dashboard = () => {
     },
   };
   const config2 = {
-    data: dataMonthlySales,
+    data: dataOrder,
     xField: "type",
     yField: "sales",
     // color: ({ type }) => {
@@ -234,7 +335,8 @@ const Dashboard = () => {
           <div>
             <p className="desc">Total Income</p>
             <h4 className="mb-0 sub-title">
-              $ {yearlyDataState?.data && yearlyDataState?.data[0]?.amount}
+              {/* $ {yearlyDataState?.data && yearlyDataState?.data[0]?.amount} */}
+              $ {totalIncome}
             </h4>
           </div>
           <div className="d-flex p-3 flex-column align-items-end">
@@ -248,7 +350,8 @@ const Dashboard = () => {
           <div>
             <p className="desc ">Total Sales</p>
             <h4 className="mb-0 sub-title">
-              {yearlyDataState?.data && yearlyDataState?.data[0]?.count}
+              {/* {yearlyDataState?.data && yearlyDataState?.data[0]?.count} */}
+              {totalSales}
             </h4>
           </div>
           <div className="d-flex p-3 flex-column align-items-end">

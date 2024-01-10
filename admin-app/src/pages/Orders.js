@@ -91,6 +91,7 @@ const Orders = () => {
       ),
     });
   }
+
   const setOrderStatus = (e, i) => {
     console.log(e, i);
     const data = { id: i, orderData: e };
