@@ -80,7 +80,7 @@ const Orders = () => {
         <>
           <Link
             className="ms-3 fs-3 text-danger"
-            to={`/admin/orders/${orderState[i].user}`}
+            to={`/admin/orders/${orderState[i]._id}`}
           >
             <AiOutlineEye />
           </Link>
