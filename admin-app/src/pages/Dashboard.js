@@ -135,31 +135,31 @@ const Dashboard = () => {
   const dataIncome = [
     {
       type: "Jan",
-      income: 30,
+      income: 350,
     },
     {
       type: "Feb",
-      income: 52,
+      income: 354,
     },
     {
       type: "Mar",
-      income: 90,
+      income: 276,
     },
     {
       type: "Apr",
-      income: 150,
+      income: 550,
     },
     {
       type: "May",
-      income: 90,
+      income: 120,
     },
     {
       type: "Jun",
-      income: 130,
+      income: 330,
     },
     {
       type: "July",
-      income: 120,
+      income: 520,
     },
     {
       type: "Aug",
@@ -167,15 +167,15 @@ const Dashboard = () => {
     },
     {
       type: "Sept",
-      income: 139,
+      income: 339,
     },
     {
       type: "Oct",
-      income: 200,
+      income: 270,
     },
     {
       type: "Nov",
-      income: 135,
+      income: 455,
     },
     {
       type: "Dec",
