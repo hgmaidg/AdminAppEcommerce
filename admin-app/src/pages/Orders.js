@@ -45,9 +45,9 @@ const Orders = () => {
   const orderState = useSelector((state) => state.auth.orders);
 
   const data1 = [];
-  for (let i = 0; i < orderState?.length; i++) {
+  for (let i = orderState?.length - 1; i >= 0; i--) {
     data1.push({
-      key: i + 1,
+      key: orderState?.length - i,
       name:
         orderState[i].shippingInfo.firstName +
         " " +

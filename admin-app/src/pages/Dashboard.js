@@ -256,9 +256,9 @@ const Dashboard = () => {
     setDataMonthlySales(monthlyOrderCount);
 
     const data2 = [];
-    for (let i = 0; i < orderState?.length; i++) {
+    for (let i = orderState?.length - 1; i >= 0; i--) {
       data2.push({
-        key: `${i + 1}`,
+        key: `${orderState?.length - i}`,
         name: `${orderState[i]?.shippingInfo?.firstName} ${orderState[i]?.shippingInfo?.lastName}`,
         product: orderState[i]?.orderItems?.length,
         price: `$${orderState[i]?.totalPrice}`,
